@@ -75,7 +75,7 @@ def get_top_3_actors_in_children_category(spark: SparkSession):
     return df.select(df['first_name'], df['last_name'])
 
 
-def get_citys_with_active_inactive_clients(spark: SparkSession):
+def get_cities_with_active_inactive_clients(spark: SparkSession):
     address_df = get_table(spark, 'address')
     customer_df = get_table(spark, 'customer')
     city_df = get_table(spark, 'city')
@@ -116,26 +116,13 @@ def main():
     spark = SparkSession.builder.config('spark.jars', 'postgresql-42.4.1.jar') \
         .master('local').appName('spark_framework_task').getOrCreate()
 
-    df = get_count_films_in_each_category(spark)
-    df.show(truncate=False)
-
-    df = get_top_10_actors(spark)
-    df.show(truncate=False)
-
-    df = get_the_most_spent_category(spark)
-    df.show(truncate=False)
-
-    df = get_films_that_are_not_in_inventory(spark)
-    df.show(truncate=False)
-
-    df = get_top_3_actors_in_children_category(spark)
-    df.show(truncate=False)
-
-    df = get_citys_with_active_inactive_clients(spark)
-    df.show(truncate=False)
-
-    df = get_category_with_the_largest_rental_amount(spark)
-    df.show(truncate=False)
+    get_count_films_in_each_category(spark).show(truncate=False)
+    get_top_10_actors(spark).show(truncate=False)
+    get_the_most_spent_category(spark).show(truncate=False)
+    get_films_that_are_not_in_inventory(spark).show(truncate=False)
+    get_top_3_actors_in_children_category(spark).show(truncate=False)
+    get_cities_with_active_inactive_clients(spark).show(truncate=False)
+    get_category_with_the_largest_rental_amount(spark).show(truncate=False)
 
 
 if __name__ == '__main__':
